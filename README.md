@@ -53,6 +53,7 @@ flowchart LR
 
 - [Case study based on the original academic report (Vietnamese)](docs/case_study.md)
 - [Power BI use cases with worked examples (Vietnamese)](docs/use_cases.md)
+- [Business decisions informed by the dashboard (Vietnamese)](docs/business_strategy.md)
 - [Business questions and cleaning rules](docs/business_requirements.md)
 - [Data dictionary and star schema](docs/data_model.md)
 - [KPI definitions and validation evidence](docs/validation.md)

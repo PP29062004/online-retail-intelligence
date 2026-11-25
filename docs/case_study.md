@@ -2,7 +2,7 @@
 
 **Sinh viên thực hiện** Phạm Thanh Phúc
 
-Tôi thực hiện đồ án chuyên ngành Hệ thống thông tin tại HUTECH, sử dụng bộ Online Retail II của UCI. Bộ dữ liệu ghi lại giao dịch của một nhà bán lẻ trực tuyến tại Anh từ tháng 12/2009 đến tháng 12/2011. Từ các dòng hóa đơn trong Excel, tôi muốn biết tháng nào bán được nhiều, mặt hàng nào đóng góp nhiều doanh thu và khách hàng có thói quen mua ra sao.
+Tôi thực hiện đồ án chuyên ngành Hệ thống thông tin tại HUTECH, sử dụng bộ Online Retail II của UCI. Bộ dữ liệu ghi lại giao dịch của một nhà bán lẻ trực tuyến tại Anh từ tháng 12/2009 đến tháng 12/2011. Từ các dòng hóa đơn trong Excel, tôi muốn biết khi nào nên chuẩn bị cho đợt bán cao điểm, mã hàng nào bán đều qua nhiều đơn và nên thử chăm sóc lại nhóm khách nào.
 
 ## Cách tôi xử lý dữ liệu và dựng báo cáo
 
@@ -23,5 +23,7 @@ Sau làm sạch còn **779.425 dòng**, tương ứng **£17,37 triệu doanh th
 ![Trang tổng quan doanh thu của bản dựng lại trong Power BI](../assets/sales-overview.png)
 
 Các tình huống xem báo cáo được ghi trong [use case Power BI](use_cases.md). Số liệu theo từng phạm vi và từng bước lọc nằm trong [tài liệu đối soát](validation.md).
+
+Phần nghiên cứu tiếp theo đối chiếu từng đề xuất với số liệu từ hóa đơn. [Phân tích và đề xuất kinh doanh](business_strategy.md)
 
 *Nguồn nội dung đồ án gồm câu hỏi phân tích ở mục 1.4, luồng xử lý ở mục 4.4, phần làm sạch và làm giàu dữ liệu ở mục 5.2–5.3, và kết quả cùng dashboard ở mục 6.2–6.6.*
