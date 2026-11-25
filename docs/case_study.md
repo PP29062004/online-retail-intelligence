@@ -1,27 +1,25 @@
-# Online Retail Intelligence
+# Phân tích doanh thu bán lẻ trực tuyến
 
-## Tiếng Việt
+Đây là đồ án nhóm môn Phân tích dữ liệu trên điện toán đám mây tại HUTECH. Nhóm dùng bộ Online Retail II của UCI, ghi lại các giao dịch của một nhà bán lẻ trực tuyến tại Anh từ tháng 12/2009 đến tháng 12/2011. Từ các dòng hóa đơn trong Excel, nhóm muốn biết tháng nào bán được nhiều, mặt hàng nào đóng góp nhiều doanh thu và khách hàng có thói quen mua ra sao.
 
-**Tóm tắt dùng cho thẻ dự án.** Tái dựng đồ án phân tích bán lẻ thời đại học bằng Python và Power BI. Xử lý 1,07 triệu dòng giao dịch, xây mô hình sao và trực quan hóa doanh thu, thị trường khách hàng và phân khúc RFM.
+## Nhóm đã làm gì trong đồ án
 
-**Bối cảnh.** Đồ án nhóm tại HUTECH dùng Google Colab và Power BI để phân tích giao dịch của một nhà bán lẻ trực tuyến tại Anh. Khi làm lại dự án, tôi tập trung vào khả năng tái lập số liệu và định nghĩa rõ phạm vi của từng KPI.
+Nhóm lưu Excel trên Google Drive và đọc dữ liệu bằng pandas trong Colab. Một hóa đơn có thể có nhiều dòng hàng, nên nhóm tính doanh thu từng dòng bằng số lượng nhân đơn giá và đếm đơn theo mã hóa đơn. Các hóa đơn bắt đầu bằng `C` bị loại. Dòng thiếu mã khách hoặc mô tả cũng bị loại để có thể dùng cùng tập dữ liệu cho phân tích sản phẩm và khách hàng.
 
-**Cách thực hiện.** Tôi dùng Python để gộp hai sheet dữ liệu UCI, ghi lại số dòng bị loại ở từng bước và xuất một bảng giao dịch cùng bốn bảng chiều. Tôi xây báo cáo Power BI hai trang với bộ lọc theo năm và thị trường, DAX cho bốn KPI và bảng xếp hạng, cùng phân khúc RFM tại ngày 10/12/2011.
+Nhóm dùng Colab để kiểm tra dữ liệu và vẽ thử biểu đồ, sau đó dựng dashboard trong Power BI Desktop và đưa lên Power BI Service để trình bày. Bốn chỉ số doanh thu, đơn hàng, khách hàng và giá trị đơn trung bình nằm ở đầu trang. Bên dưới là doanh thu theo tháng, xếp hạng sản phẩm và khách hàng, cùng biểu đồ phân khúc RFM. Khi so sánh Colab với Power BI, báo cáo lấy ví dụ xem doanh thu tháng 10 ở Đức. Người xem chọn thị trường Đức rồi đọc điểm tháng 10 trên biểu đồ, trong khi các biểu đồ khác cũng đổi theo thị trường đã chọn.
 
-**Kết quả.** Sau làm sạch, 779.425 dòng đủ điều kiện ghi nhận £17,37 triệu doanh thu, 36.969 đơn và 5.878 khách hàng. Vương quốc Anh chiếm 82,8% doanh thu. Nhóm High Value chiếm 28,6% khách hàng và 80,2% doanh thu. Do chi tiêu là một thành phần của RFM, tỷ trọng này mô tả cơ cấu phân khúc trong dữ liệu.
+## Kết quả ghi trong báo cáo đồ án
 
-**Công cụ.** Python · pandas · Power BI · Power Query · DAX · Mô hình sao
+Mục 6.2 ghi nhận khoảng **£8,83 triệu doanh thu**, **19.000 đơn**, **4.000 khách hàng** và giá trị đơn trung bình **£460**. Trong phần phân khúc, nhóm so sánh khách hàng theo thời gian kể từ lần mua gần nhất, số lần mua và tổng chi tiêu. Theo cách chấm điểm được sử dụng khi đó, nhóm Low Value chiếm tỷ trọng lớn nhất. Ba chỉ số này mô tả lịch sử mua hàng trong tập dữ liệu.
 
-![Trang tổng quan doanh thu trong Power BI](../assets/sales-overview.png)
+## Khi dựng lại báo cáo
 
-## English
+Đoạn mã Colab còn lưu gọi `read_excel` mà không chỉ định sheet. Chạy lại các bước lọc trong đoạn mã đó trên sheet đầu cho doanh thu **£8,832 triệu**, gần với mức ghi trong đồ án. File Excel có hai sheet chồng lấn ở tháng 12/2010. Bản trong repo đọc cả hai, gộp dữ liệu và loại các dòng trùng khớp hoàn toàn sau chuẩn hóa.
 
-**Portfolio card.** Rebuilt a university retail analytics project with Python and Power BI. Processed 1.07M transaction lines, designed a star schema, and reported sales trends, customer markets and RFM segments.
+Sau làm sạch còn **779.425 dòng**, tương ứng **£17,37 triệu doanh thu**, **36.969 đơn** và **5.878 khách hàng**. Phần địa lý dùng quốc gia của khách hàng, nên Vương quốc Anh được đọc như một thị trường. Hai tháng có doanh thu cao nhất là tháng 11/2010 và tháng 11/2011. Khi đọc điểm cuối trên biểu đồ, cần nhớ dữ liệu tháng 12/2011 dừng ở ngày 9.
 
-**Context.** The original HUTECH team project used Google Colab and Power BI to explore a UK online retailer's transactions. For the rebuild, I focused on making the figures reproducible and defining what each KPI covers.
+![Trang tổng quan doanh thu của bản dựng lại trong Power BI](../assets/sales-overview.png)
 
-**Approach.** I combined both UCI worksheets in Python, logged row exclusions and exported a transaction fact with four dimensions. I built a two-page Power BI report with year and market filters, DAX measures for KPIs and rankings, and a fixed customer RFM snapshot dated 10 December 2011.
+Các tình huống xem báo cáo được ghi trong [use case Power BI](use_cases.md). Số liệu theo từng phạm vi và từng bước lọc nằm trong [tài liệu đối soát](validation.md).
 
-**Results.** The 779,425 qualifying lines represent £17.37M in sales, 36,969 orders and 5,878 customers. The UK accounted for 82.8% of revenue. The High Value segment accounted for 28.6% of customers and 80.2% of revenue, a descriptive result given that spend plays a role in segment scoring.
-
-**Tools.** Python · pandas · Power BI · Power Query · DAX · Star schema
+*Nguồn nội dung đồ án gồm câu hỏi phân tích ở mục 1.4, luồng xử lý ở mục 4.4, phần làm sạch và làm giàu dữ liệu ở mục 5.2–5.3, và kết quả cùng dashboard ở mục 6.2–6.6.*
