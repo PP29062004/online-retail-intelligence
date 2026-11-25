@@ -1,6 +1,6 @@
 # Reconstruction notes
 
-The original HUTECH team report described a Colab workflow, a Power BI Service dashboard, and three RFM groups. The available Colab export contains the initial cleaning and exploratory charts. V2 reconstructs the report and semantic model in Power BI Desktop from the public UCI workbook.
+The original HUTECH project report described a Colab workflow, a Power BI Service dashboard, and three RFM groups. The available Colab export contains the initial cleaning and exploratory charts. V2 reconstructs the report and semantic model in Power BI Desktop from the public UCI workbook.
 
 | Evidence | What it supports |
 | --- | --- |

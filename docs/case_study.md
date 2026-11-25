@@ -1,16 +1,18 @@
 # Phân tích doanh thu bán lẻ trực tuyến
 
-Đây là đồ án nhóm môn Phân tích dữ liệu trên điện toán đám mây tại HUTECH. Nhóm dùng bộ Online Retail II của UCI, ghi lại các giao dịch của một nhà bán lẻ trực tuyến tại Anh từ tháng 12/2009 đến tháng 12/2011. Từ các dòng hóa đơn trong Excel, nhóm muốn biết tháng nào bán được nhiều, mặt hàng nào đóng góp nhiều doanh thu và khách hàng có thói quen mua ra sao.
+**Sinh viên thực hiện** Phạm Thanh Phúc
 
-## Nhóm đã làm gì trong đồ án
+Tôi thực hiện đồ án chuyên ngành Hệ thống thông tin tại HUTECH, sử dụng bộ Online Retail II của UCI. Bộ dữ liệu ghi lại giao dịch của một nhà bán lẻ trực tuyến tại Anh từ tháng 12/2009 đến tháng 12/2011. Từ các dòng hóa đơn trong Excel, tôi muốn biết tháng nào bán được nhiều, mặt hàng nào đóng góp nhiều doanh thu và khách hàng có thói quen mua ra sao.
 
-Nhóm lưu Excel trên Google Drive và đọc dữ liệu bằng pandas trong Colab. Một hóa đơn có thể có nhiều dòng hàng, nên nhóm tính doanh thu từng dòng bằng số lượng nhân đơn giá và đếm đơn theo mã hóa đơn. Các hóa đơn bắt đầu bằng `C` bị loại. Dòng thiếu mã khách hoặc mô tả cũng bị loại để có thể dùng cùng tập dữ liệu cho phân tích sản phẩm và khách hàng.
+## Cách tôi xử lý dữ liệu và dựng báo cáo
 
-Nhóm dùng Colab để kiểm tra dữ liệu và vẽ thử biểu đồ, sau đó dựng dashboard trong Power BI Desktop và đưa lên Power BI Service để trình bày. Bốn chỉ số doanh thu, đơn hàng, khách hàng và giá trị đơn trung bình nằm ở đầu trang. Bên dưới là doanh thu theo tháng, xếp hạng sản phẩm và khách hàng, cùng biểu đồ phân khúc RFM. Khi so sánh Colab với Power BI, báo cáo lấy ví dụ xem doanh thu tháng 10 ở Đức. Người xem chọn thị trường Đức rồi đọc điểm tháng 10 trên biểu đồ, trong khi các biểu đồ khác cũng đổi theo thị trường đã chọn.
+Tôi lưu file Excel trên Google Drive và đọc dữ liệu bằng pandas trong Colab. Một hóa đơn có thể có nhiều dòng hàng, nên tôi tính doanh thu từng dòng bằng số lượng nhân đơn giá và đếm đơn theo mã hóa đơn. Tôi loại các hóa đơn bắt đầu bằng `C` và các dòng thiếu mã khách hoặc mô tả để có thể dùng cùng tập dữ liệu cho phân tích sản phẩm và khách hàng.
+
+Tôi dùng Colab để kiểm tra dữ liệu và vẽ thử biểu đồ, sau đó dựng dashboard trong Power BI Desktop và đưa lên Power BI Service để trình bày. Bốn chỉ số doanh thu, đơn hàng, khách hàng và giá trị đơn trung bình nằm ở đầu trang. Bên dưới là doanh thu theo tháng, xếp hạng sản phẩm và khách hàng, cùng biểu đồ phân khúc RFM. Khi so sánh Colab với Power BI, tôi lấy ví dụ xem doanh thu tháng 10 ở Đức. Người xem chọn thị trường Đức rồi đọc điểm tháng 10 trên biểu đồ. Các biểu đồ khác cũng đổi theo thị trường đã chọn.
 
 ## Kết quả ghi trong báo cáo đồ án
 
-Mục 6.2 ghi nhận khoảng **£8,83 triệu doanh thu**, **19.000 đơn**, **4.000 khách hàng** và giá trị đơn trung bình **£460**. Trong phần phân khúc, nhóm so sánh khách hàng theo thời gian kể từ lần mua gần nhất, số lần mua và tổng chi tiêu. Theo cách chấm điểm được sử dụng khi đó, nhóm Low Value chiếm tỷ trọng lớn nhất. Ba chỉ số này mô tả lịch sử mua hàng trong tập dữ liệu.
+Mục 6.2 ghi nhận khoảng **£8,83 triệu doanh thu**, **19.000 đơn**, **4.000 khách hàng** và giá trị đơn trung bình **£460**. Trong phần phân khúc, tôi so sánh khách hàng theo thời gian kể từ lần mua gần nhất, số lần mua và tổng chi tiêu. Theo cách chấm điểm tôi dùng khi làm đồ án, Low Value là phân khúc đông nhất. Ba chỉ số này mô tả lịch sử mua hàng trong tập dữ liệu.
 
 ## Khi dựng lại báo cáo
 

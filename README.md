@@ -1,6 +1,8 @@
 # Online Retail Intelligence
 
-A Power BI and Python reconstruction of a HUTECH team project on online retail analytics. V2 turns the UCI workbook into a reproducible sales report and a documented RFM customer snapshot.
+A Power BI and Python reconstruction of the online retail analytics project I completed as an Information Systems student at HUTECH. V2 turns the UCI workbook into a reproducible sales report and an RFM customer snapshot.
+
+**Student** Phạm Thanh Phúc
 
 ## Report
 
