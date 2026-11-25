@@ -1,0 +1,69 @@
+table DimCustomer
+
+	column CustomerID
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	column LastPurchase
+		dataType: dateTime
+		formatString: dd MMM yyyy
+		summarizeBy: none
+		sourceColumn: LastPurchase
+
+	column Frequency
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: Frequency
+
+	column Monetary
+		dataType: decimal
+		formatString: £#,0.00
+		summarizeBy: none
+		sourceColumn: Monetary
+
+	column Recency
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: Recency
+
+	column RScore
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: RScore
+
+	column FScore
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: FScore
+
+	column MScore
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: MScore
+
+	column RFMScore
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: RFMScore
+
+	column Segment
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Segment
+
+	column SnapshotDate
+		dataType: dateTime
+		formatString: dd MMM yyyy
+		summarizeBy: none
+		sourceColumn: SnapshotDate
+
+	partition DimCustomer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(pDataFolder & "\DimCustomer.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"CustomerID", type text}, {"LastPurchase", type datetime}, {"Frequency", Int64.Type}, {"Monetary", Currency.Type}, {"Recency", Int64.Type}, {"RScore", Int64.Type}, {"FScore", Int64.Type}, {"MScore", Int64.Type}, {"RFMScore", Int64.Type}, {"Segment", type text}, {"SnapshotDate", type datetime}}, "en-GB")
+				in
+				    Typed

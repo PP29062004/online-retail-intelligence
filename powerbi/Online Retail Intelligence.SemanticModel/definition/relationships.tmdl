@@ -1,0 +1,15 @@
+relationship a5d9a92f-d128-513d-89be-1ceb9c9817b1
+	fromColumn: FactSales.Date
+	toColumn: DimDate.Date
+
+relationship 6c5857d1-d8fb-5126-b147-0faebba7eb2c
+	fromColumn: FactSales.StockCode
+	toColumn: DimProduct.StockCode
+
+relationship 6bea44af-8d50-5610-98a9-c2b68af4497e
+	fromColumn: FactSales.Country
+	toColumn: DimCountry.Country
+
+relationship a3f279ad-6701-5376-9456-d5f220e68f58
+	fromColumn: FactSales.CustomerID
+	toColumn: DimCustomer.CustomerID

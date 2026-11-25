@@ -1,0 +1,13 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+
+	annotation PBI_QueryOrder = ["pDataFolder","FactSales","DimDate","DimProduct","DimCountry","DimCustomer"]
+	annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table FactSales
+ref table DimDate
+ref table DimProduct
+ref table DimCountry
+ref table DimCustomer

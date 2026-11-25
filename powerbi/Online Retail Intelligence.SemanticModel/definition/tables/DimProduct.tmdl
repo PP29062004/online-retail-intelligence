@@ -1,0 +1,27 @@
+table DimProduct
+
+	column StockCode
+		dataType: string
+		summarizeBy: none
+		sourceColumn: StockCode
+
+	column Description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Description
+
+	column Product
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Product
+
+	partition DimProduct = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(pDataFolder & "\DimProduct.csv"), [Delimiter=",", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"StockCode", type text}, {"Description", type text}}, "en-GB"),
+				    Product = Table.AddColumn(Typed, "Product", each [Description] & " (" & [StockCode] & ")", type text)
+				in
+				    Product

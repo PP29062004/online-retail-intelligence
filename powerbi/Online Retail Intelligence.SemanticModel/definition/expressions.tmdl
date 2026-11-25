@@ -1,0 +1,2 @@
+/// Absolute path to the five CSV files produced by the Python pipeline.
+expression pDataFolder = "C:\OnlineRetail\data\processed" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]

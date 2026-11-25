@@ -1,0 +1,105 @@
+table FactSales
+
+	measure 'Sales revenue' = SUM(FactSales[Revenue])
+		formatString: £#,0.00
+
+	measure 'Orders' = DISTINCTCOUNT(FactSales[InvoiceNo])
+		formatString: #,0
+
+	measure 'Active customers' = DISTINCTCOUNT(FactSales[CustomerID])
+		formatString: #,0
+
+	measure 'Average order value' = DIVIDE([Sales revenue], [Orders])
+		formatString: £#,0.00
+
+	measure 'Segment sales share' = DIVIDE([Sales revenue], CALCULATE([Sales revenue], ALLSELECTED(DimCustomer[Segment])))
+		formatString: 0.0%
+
+	measure 'Product ranking revenue' =
+			VAR Candidates = FILTER(ADDCOLUMNS(ALLSELECTED(DimProduct[Product]), "__Revenue", [Sales revenue]), NOT ISBLANK([__Revenue]))
+			VAR Leaders = TOPN(10, Candidates, [__Revenue], DESC, DimProduct[Product], ASC)
+			RETURN IF(CONTAINS(Leaders, DimProduct[Product], SELECTEDVALUE(DimProduct[Product])), [Sales revenue])
+		formatString: £#,0.00
+		isHidden
+
+	measure 'Market ranking revenue' =
+			VAR Candidates = FILTER(ADDCOLUMNS(ALLSELECTED(DimCountry[Country]), "__Revenue", [Sales revenue]), NOT ISBLANK([__Revenue]))
+			VAR Leaders = TOPN(6, Candidates, [__Revenue], DESC, DimCountry[Country], ASC)
+			RETURN IF(CONTAINS(Leaders, DimCountry[Country], SELECTEDVALUE(DimCountry[Country])), [Sales revenue])
+		formatString: £#,0.00
+		isHidden
+
+	measure 'Customer ranking revenue' =
+			VAR Candidates = FILTER(ADDCOLUMNS(ALLSELECTED(DimCustomer[CustomerID]), "__Revenue", [Sales revenue]), NOT ISBLANK([__Revenue]))
+			VAR Leaders = TOPN(8, Candidates, [__Revenue], DESC, DimCustomer[CustomerID], ASC)
+			RETURN IF(CONTAINS(Leaders, DimCustomer[CustomerID], SELECTEDVALUE(DimCustomer[CustomerID])), [Sales revenue])
+		formatString: £#,0.00
+		isHidden
+
+	column InvoiceNo
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: InvoiceNo
+
+	column StockCode
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: StockCode
+
+	column CustomerID
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	column Country
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Country
+
+	column Date
+		dataType: dateTime
+		formatString: dd MMM yyyy
+		isHidden
+		summarizeBy: none
+		sourceColumn: Date
+
+	column InvoiceDate
+		dataType: dateTime
+		formatString: dd MMM yyyy HH:mm
+		isHidden
+		summarizeBy: none
+		sourceColumn: InvoiceDate
+
+	column Quantity
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: Quantity
+
+	column UnitPrice
+		dataType: decimal
+		formatString: £#,0.00
+		isHidden
+		summarizeBy: none
+		sourceColumn: UnitPrice
+
+	column Revenue
+		dataType: decimal
+		formatString: £#,0.00
+		isHidden
+		summarizeBy: none
+		sourceColumn: Revenue
+
+	partition FactSales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(pDataFolder & "\FactSales.csv"), [Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"InvoiceNo", type text}, {"StockCode", type text}, {"CustomerID", type text}, {"Country", type text}, {"Date", type datetime}, {"InvoiceDate", type datetime}, {"Quantity", Int64.Type}, {"UnitPrice", Currency.Type}, {"Revenue", Currency.Type}}, "en-GB")
+				in
+				    Typed

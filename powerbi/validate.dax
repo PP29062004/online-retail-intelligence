@@ -1,0 +1,38 @@
+// Run in DAX query view after loading the five generated CSVs.
+
+EVALUATE
+ROW(
+    "Revenue", [Sales revenue],
+    "Orders", [Orders],
+    "Active Customers", [Active customers],
+    "AOV", [Average order value]
+)
+
+EVALUATE
+CALCULATETABLE(
+    ROW(
+        "Revenue", [Sales revenue],
+        "Orders", [Orders],
+        "Active Customers", [Active customers],
+        "AOV", [Average order value]
+    ),
+    DimDate[Year] = 2011,
+    DimCountry[Country] = "France"
+)
+
+EVALUATE
+SUMMARIZECOLUMNS(
+    DimCustomer[Segment],
+    "Active Customers", [Active customers],
+    "Sales", [Sales revenue],
+    "Sales Share", [Segment sales share]
+)
+
+EVALUATE
+SUMMARIZECOLUMNS(
+    DimCustomer[Segment],
+    TREATAS({2011}, DimDate[Year]),
+    TREATAS({"France"}, DimCountry[Country]),
+    "Active Customers", [Active customers],
+    "Sales", [Sales revenue]
+)
