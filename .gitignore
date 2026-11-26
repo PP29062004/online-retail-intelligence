@@ -6,4 +6,5 @@ data/raw/*
 data/processed/*
 !data/processed/.gitkeep
 *.pbix
+!/demo/Online Retail Intelligence - Ban hang VI.pbix
 **/.pbi/

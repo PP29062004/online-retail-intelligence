@@ -1,65 +1,60 @@
 # Online Retail Intelligence
 
-A Power BI and Python reconstruction of the online retail analytics project I completed as an Information Systems student at HUTECH. V2 turns the UCI workbook into a reproducible sales report and an RFM customer snapshot.
+**Phạm Thanh Phúc** · Đồ án chuyên ngành Hệ thống thông tin, HUTECH
 
-**Student** Phạm Thanh Phúc
+Tôi dùng dữ liệu hóa đơn của một nhà bán lẻ trực tuyến tại Anh để trả lời ba câu hỏi của bộ phận bán hàng. Khi nào cần chuẩn bị cho cao điểm? Mã hàng nào có nhu cầu ổn định? Nên ưu tiên chăm sóc lại nhóm khách nào?
 
-## Report
+## Bài toán tôi đặt ra
 
-![Sales overview in Power BI Desktop](assets/sales-overview.png)
+Trong hai tháng 10–11, tổng doanh thu năm 2011 gần như đi ngang so với năm 2010. Khi tách theo quốc gia, doanh thu ở Vương quốc Anh giảm **3,1%**, còn các thị trường ngoài Anh cộng lại tăng **14,3%**. Nếu chỉ nhìn tổng doanh thu, bộ phận bán hàng dễ bỏ qua sự dịch chuyển này khi chuẩn bị hàng cho mùa cao điểm.
 
-- **Sales overview** tracks revenue, distinct orders, active customers and average order value. It shows monthly revenue and the leading customer markets and stock codes.
-- **Customer segments** compares active customers and sales by RFM group and ranks customers by sales in the selected slice.
-- Both pages support year and market filters. RFM assignments use the full-period snapshot on 10 December 2011.
+Tôi dùng giao dịch lịch sử để mô phỏng cách bộ phận bán hàng và vận hành đọc báo cáo, kiểm tra số liệu rồi chọn việc cần làm tiếp. Bối cảnh sử dụng là giả định của đồ án.
 
-## Verified results
+## Phần tôi thực hiện
 
-| Metric | Full period |
-| --- | ---: |
-| Workbook rows | 1,067,371 |
-| Qualifying transaction lines | 779,425 |
-| Sales revenue | £17,374,804.27 |
-| Distinct orders | 36,969 |
-| Active customers | 5,878 |
-| Average order value | £469.98 |
+| Năng lực | Tôi đã làm gì | Minh chứng |
+| --- | --- | --- |
+| **Business Analysis** | Chuyển câu hỏi kinh doanh thành yêu cầu cho từng trang, chốt cách tính KPI với các tình huống dễ hiểu sai và viết tiêu chí nghiệm thu có số đối chiếu. | [BRD/SRS](docs/business_requirements.md) · [Use case Power BI](docs/use_cases.md) |
+| **Data Analysis** | Gộp hai sheet Excel bằng pandas, ghi lại số dòng qua từng bước lọc, dựng mô hình sao và KPI trong Power BI. Kiểm tra đơn bất thường và đo tỷ lệ mua lại của từng nhóm RFM trên giao dịch phát sinh sau kỳ chấm điểm. | [Phân tích và đề xuất](docs/business_strategy.md) · [Đối soát số liệu](docs/validation.md) |
 
-The UK accounted for **82.8%** of qualifying sales. November 2010 was the highest month at **£1.17M**, closely followed by November 2011. December 2011 covers days 1–9. The High Value group accounted for **28.6% of customers and 80.2% of sales**. Monetary value contributes to RFM scoring, so the sales concentration describes this grouping by design.
+## Báo cáo Power BI
 
-Revenue covers positive sales from identifiable customers after cleaning. Market comes from customer country of residence. The sales data includes non-merchandise stock codes such as postage and manual charges.
+[Xem ảnh của cả ba trang](demo/README.md) · [Tải file Power BI (.pbix)](demo/Online%20Retail%20Intelligence%20-%20Ban%20hang%20VI.pbix)
 
-## Reproduce
+| Trang | Câu hỏi báo cáo giúp trả lời |
+| --- | --- |
+| **Tổng quan bán hàng** | Doanh thu, đơn hàng và khách thay đổi ra sao theo tháng và ngày? Nếu kỳ hiện tại thiếu ngày, chênh lệch thế nào khi so với cùng số ngày năm trước? |
+| **Khách hàng** | Khách mua lần đầu trong dữ liệu hay khách từng mua đóng góp nhiều hơn? Nhóm nào nên ưu tiên giữ chân hoặc thử chăm sóc lại? |
+| **Thị trường và mã hàng** | Doanh thu tập trung ở quốc gia nào? Một mã hàng đứng đầu nhờ nhiều khách mua hay nhờ một hóa đơn lớn? |
 
-1. Download [Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii). Extract `online_retail_II.xlsx` to `data/raw/`.
-2. From the repository root with Python 3.11 or 3.12, run:
+![Trang Thị trường và mã hàng với bản đồ doanh thu và bảng Top 10 mã hàng](demo/images/thi-truong-va-ma-hang.png)
+
+[Xem trang Tổng quan bán hàng](demo/images/tong-quan-ban-hang.png) · [Xem trang Khách hàng](demo/images/phan-tich-khach-hang.png)
+
+## Một ví dụ từ dữ liệu
+
+Mã `22423` đạt **£277.656** qua **3.317 đơn**. Mã `23843` đạt **£168.470** từ **một đơn**. Trong Excel có một dòng hủy khớp mã khách, mã hàng, đơn giá và số lượng đối dấu sau đó 12 phút. Tôi sẽ đưa `22423` vào danh sách theo dõi trước mùa cao điểm và đối soát đơn của `23843` trước khi dùng số liệu để đề xuất nhập thêm hàng. [Phép đối chiếu và cách chạy lại](docs/business_strategy.md)
+
+Sau khi gộp và làm sạch **1.067.371 dòng**, còn **779.425 dòng**, tương ứng **£17,37 triệu doanh thu**, **36.969 đơn** và **5.878 khách có mã định danh**. Doanh thu tính trên các dòng bán dương đủ điều kiện, theo GBP.
+
+## Chạy lại dự án
+
+1. Tải [Online Retail II từ UCI](https://archive.ics.uci.edu/dataset/502/online+retail+ii), giải nén `online_retail_II.xlsx` vào `data/raw/`.
+2. Chạy từ thư mục gốc bằng Python 3.11 hoặc 3.12.
 
    ```sh
    python -m pip install -r requirements.txt
    python -m unittest discover -s tests -v
    python src/pipeline.py
+   python -m src.strategy
    ```
 
-3. Open [Online Retail Intelligence.pbip](powerbi/Online%20Retail%20Intelligence.pbip) in Power BI Desktop. Set `pDataFolder` to the absolute path to `data/processed` and refresh. Follow the [Power BI guide](powerbi/BUILD.md) for the menu steps.
+3. Mở [Online Retail Intelligence.pbip](powerbi/Online%20Retail%20Intelligence.pbip) bằng Power BI Desktop. Đặt `pDataFolder` thành đường dẫn tuyệt đối tới `data/processed` rồi làm mới dữ liệu. [Hướng dẫn mở báo cáo](powerbi/BUILD.md)
 
-```mermaid
-flowchart LR
-    A[UCI workbook] --> B[Python ETL and RFM]
-    B --> C[Audit and five model tables]
-    C --> D[Power BI semantic model]
-    D --> E[Sales overview and customer segments]
-    C --> F[Exploratory notebook]
-```
+Bản PBIP trong repo có hai trang và chứa mô hình dữ liệu, Power Query và các phép đo DAX. Bản Power BI tiếng Việt ba trang trong thư mục demo có sẵn dữ liệu và được mô tả trong BRD/SRS và use case.
 
-## Documentation
+[Báo cáo đồ án và những thay đổi khi dựng lại](docs/case_study.md) · [Mô hình và từ điển dữ liệu](docs/data_model.md) · [Notebook khảo sát dữ liệu](notebooks/retail_analysis.ipynb)
 
-- [Case study based on the original academic report (Vietnamese)](docs/case_study.md)
-- [Power BI use cases with worked examples (Vietnamese)](docs/use_cases.md)
-- [Business decisions informed by the dashboard (Vietnamese)](docs/business_strategy.md)
-- [Business questions and cleaning rules](docs/business_requirements.md)
-- [Data dictionary and star schema](docs/data_model.md)
-- [KPI definitions and validation evidence](docs/validation.md)
-- [Reconstruction notes](docs/recovery_notes.md)
-- [Exploratory notebook](notebooks/retail_analysis.ipynb)
+**Nguồn dữ liệu** Daqing Chen, *Online Retail II*, UCI Machine Learning Repository. [DOI](https://doi.org/10.24432/C5CG6D) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-The original academic report used Colab and Power BI Service. The V2 source uses a local Python batch pipeline and Power BI Desktop. The raw workbook, generated CSVs and Desktop cache are local artifacts. The repository tracks the report layout, Power Query definitions, semantic model and DAX measures as text.
-
-Dataset attribution: Daqing Chen, *Online Retail II*, UCI Machine Learning Repository, [DOI 10.24432/C5CG6D](https://doi.org/10.24432/C5CG6D), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The pipeline transforms the source data into model tables.
+**Bản đồ** Dữ liệu hình học từ Natural Earth, đóng gói bởi [World Atlas](https://github.com/topojson/world-atlas).

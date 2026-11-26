@@ -1,33 +1,33 @@
-# Use case báo cáo bán lẻ Power BI
+# Use case báo cáo bán lẻ
 
-Năm tình huống dưới đây bám theo năm câu hỏi phân tích trong mục 1.4 của báo cáo đồ án. Tên trang, tên bộ lọc và số đối soát lấy từ bản Power BI trong repo. Người dùng trong các tình huống này là người xem báo cáo doanh thu. Báo cáo cần được nạp dữ liệu trước khi thực hiện các bước.
+Các tình huống dùng bản Power BI tiếng Việt ba trang đã nạp dữ liệu. Xóa các bộ lọc của tình huống trước khi bắt đầu tình huống mới.
 
-## UC-01 Xem doanh thu và số đơn của một thị trường
+## UC-01 · Kiểm tra doanh thu của một thị trường
 
-Mở **Sales overview**, chọn năm ở **Sales year** và quốc gia ở **Customer market**. Đọc bốn thẻ doanh thu, số đơn, số khách có giao dịch và giá trị trung bình một đơn. Một hóa đơn có nhiều dòng hàng vẫn được đếm là một đơn.
+**Người dùng** Quản lý bán hàng · **Yêu cầu** FR-01
 
-**Kiểm tra.** Chọn năm **2011** và **France**. Bốn thẻ lần lượt cho **£199.336,00**, **368 đơn**, **84 khách** và **£541,67 mỗi đơn**.
+Trên **Tổng quan bán hàng**, chọn **Năm 2011** và **Thị trường Pháp**, giữ tất cả tháng. Đọc bốn thẻ KPI. Kết quả lần lượt là **£199.336,00**, **368 đơn**, **84 khách** và **£541,67/đơn**. Cách kiểm tra số đơn là đếm mã hóa đơn khác nhau trong kỳ đã lọc.
 
-## UC-02 Xem doanh thu biến động theo tháng
+## UC-02 · So sánh một tháng chưa đủ dữ liệu
 
-Báo cáo đồ án minh họa bằng câu hỏi xem doanh thu tháng 10 ở Đức. Trên **Sales overview**, chọn **Germany** và năm cần xem, rồi rê chuột vào điểm tháng 10 trên biểu đồ **Monthly sales revenue**. Có thể xem các điểm liền trước và sau để biết mức doanh thu đó cao hay thấp so với những tháng gần nhất.
+**Người dùng** Quản lý bán hàng · **Yêu cầu** FR-02
 
-**Kiểm tra.** Với năm **2011**, điểm tháng 10 tại Đức là **£31.628,42**. Ở chế độ xem toàn kỳ, tháng 12/2011 chỉ có giao dịch từ ngày 1 đến ngày 9.
+Trên **Tổng quan bán hàng**, chọn **Tháng 12/2011** và giữ mọi thị trường. Đọc hai cột so sánh cùng kỳ. Doanh thu ngày **1–9/12/2011** là **£517.208,44**, cùng chín ngày năm 2010 là **£310.656,37**. Rê chuột vào biểu đồ theo ngày để kiểm tra số đơn của ngày cần tìm hiểu.
 
-## UC-03 Tìm những mã hàng đóng góp nhiều doanh thu
+## UC-03 · Đọc bản đồ trước khi xem cơ cấu mã hàng
 
-Trên **Sales overview**, giữ bộ lọc của kỳ đang xem và đọc biểu đồ **Top 10 stock codes by revenue**. Rê chuột vào thanh để đọc mô tả và mã hàng. Báo cáo dùng mã để gộp các dòng của cùng mặt hàng khi mô tả có thay đổi. Danh sách cũng có thể xuất hiện các mã thu phí như bưu phí.
+**Người dùng** Quản lý bán hàng · **Yêu cầu** FR-05
 
-**Kiểm tra.** Khi bỏ lọc năm và thị trường, mã **22423** (*Regency Cakestand 3 Tier*) đứng đầu với **£277.656,25**.
+Trên **Thị trường và mã hàng**, chọn Úc trên bản đồ. Bảng thị trường còn Úc và Top mã hàng được tính lại theo các giao dịch của thị trường này. Bỏ chọn vùng để xem lại toàn bộ. Khi một nhãn quốc gia không xuất hiện trên bản đồ, tra trong bảng cạnh bản đồ.
 
-## UC-04 Xem doanh thu tập trung ở thị trường nào
+## UC-04 · Kiểm tra một mã đứng đầu có bán đều không
 
-Trên **Sales overview**, bỏ lọc quốc gia để xem **Top 6 customer markets by revenue** và so sánh Vương quốc Anh với các thị trường còn lại trong bảng xếp hạng. Khi cần tính tỷ trọng của một thị trường, lấy doanh thu thị trường chia cho tổng doanh thu của tất cả thị trường trong cùng kỳ.
+**Người dùng** Bộ phận vận hành · **Yêu cầu** FR-06
 
-**Kiểm tra.** Với toàn bộ thời gian, **United Kingdom** đứng đầu với **£14.389.234,92**, tương đương **82,8%** doanh thu đủ điều kiện. Trường `Country` ghi quốc gia của khách hàng.
+Trên **Thị trường và mã hàng**, giữ toàn kỳ và mọi thị trường. Đọc bảng Top 10. Mã `22423` có **3.317 đơn**, còn doanh thu mã `23843` đến từ **một đơn**. Với mã `23843`, mở dữ liệu nguồn và đối chiếu dòng hủy trước khi dùng doanh thu làm căn cứ cho kế hoạch hàng. [Kết quả đối chiếu](business_strategy.md)
 
-## UC-05 Xem cơ cấu khách hàng theo RFM
+## UC-05 · Chọn nhóm khách để xem lại
 
-Mở **Customer segments** rồi chọn năm và thị trường trên trang này. Đọc **Active customers by RFM group** để biết mỗi nhóm có bao nhiêu khách mua trong kỳ. Xem thêm **Sales revenue by RFM group** để biết doanh thu của từng nhóm. Nhãn High, Medium và Low được chốt ngày **10/12/2011**. Bộ lọc chỉ thay đổi số khách có giao dịch và doanh thu được tính vào mỗi nhóm.
+**Người dùng** Người phụ trách khách hàng · **Yêu cầu** FR-03 và FR-04
 
-**Kiểm tra.** Với **France** năm **2011**, ba nhóm High, Medium và Low lần lượt có **37**, **21** và **26** khách. Tổng là **84**, khớp thẻ khách hàng trên cùng trang.
+Trên **Khách hàng**, xem **tháng 11/2011** trên biểu đồ theo tháng. Kết quả là **191** khách mua lần đầu trong dữ liệu và **1.473** khách quay lại. Sau đó giữ năm 2011, xóa lọc tháng và chọn Pháp. Bảng RFM cho thấy **37** khách nhóm cao, **21** khách nhóm trung bình và **26** khách nhóm thấp. Tổng là **84** khách có mua trong phạm vi lọc. Mốc gán nhóm vẫn là ngày **10/12/2011**.
